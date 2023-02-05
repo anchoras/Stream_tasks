@@ -10,17 +10,14 @@ public class Task2 {
         System.out.println(uniqueDomains(strings));
 
     }
-
     static HashMap<String, Long> uniqueDomains(String[] strings) {
         return (HashMap<String, Long>) Arrays.stream(strings)
                 .map(s -> s.substring(7))
                 .map(s -> s.substring(0, myIndexOf(Pattern.compile("/"), s)))
                 .collect(Collectors.groupingBy(String::toString, Collectors.counting()));
     }
-
     static int myIndexOf(Pattern pattern, String str) {
         Matcher matcher = pattern.matcher(str);
         return matcher.find() ? matcher.start() : (str.length());
     }
-
 }

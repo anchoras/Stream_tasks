@@ -1,25 +1,19 @@
 import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Supplier;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Task3 {
     public static void main(String[] args) {
         int decimals = 3;
         System.out.println("count numbers with unique digits: " + differentDigits(decimals));
     }
-
     static long differentDigits(int decimals) {
         return IntStream
                 .range(1, (int) Math.pow(10, decimals))
-                .mapToObj(n -> Integer.toString(n))
-                .filter(s -> isUniqueSign(s))
+                .mapToObj(Integer::toString)
+                .filter(Task3::isUniqueSign)
                 .count();
     }
-
     static boolean isUniqueSign(String str) {
-        boolean isUnique = true;
         String tmpStr = str;
         HashSet<String> signsFromStr = new HashSet<>();
         while (tmpStr.length()>0) {
