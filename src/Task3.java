@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class Task3 {
@@ -6,6 +7,7 @@ public class Task3 {
         int decimals = 3;
         System.out.println("count numbers with unique digits: " + differentDigits(decimals));
     }
+
     static long differentDigits(int decimals) {
         return IntStream
                 .range(1, (int) Math.pow(10, decimals))
@@ -13,13 +15,17 @@ public class Task3 {
                 .filter(Task3::isUniqueSign)
                 .count();
     }
+
     static boolean isUniqueSign(String str) {
-        String tmpStr = str;
-        HashSet<String> signsFromStr = new HashSet<>();
-        while (tmpStr.length()>0) {
-            signsFromStr.add(tmpStr.substring(0, 1));
-            tmpStr = tmpStr.substring(1);
-        }
+        Set<Character> signsFromStr = getCharsInSet(str);
         return signsFromStr.size()==str.length();
+    }
+
+    static Set<Character> getCharsInSet(String str) {
+        Set<Character> charsInString = new HashSet<>();
+        for (int i=0; i< str.length(); i++) {
+            charsInString.add(str.charAt(i));
+        }
+        return charsInString;
     }
 }
